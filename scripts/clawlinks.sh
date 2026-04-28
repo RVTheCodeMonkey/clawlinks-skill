@@ -190,7 +190,7 @@ h1 {{ font-size: 1.5rem; margin-bottom: 16px; color: #a78bfa; }}
     <input type="text" id="topic-input" placeholder="Topic name (e.g. Dev Tools)" />
     <div class="modal-buttons">
       <button class="cancel" onclick="cancelTopic()">Cancel</button>
-      <button class="confirm" onclick="confirmTopic()">Copy command</button>
+      <button class="confirm" onclick="confirmTopic()">Set topic</button>
     </div>
   </div>
 </div>
