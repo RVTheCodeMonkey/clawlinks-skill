@@ -214,6 +214,7 @@ function copyDelete(url) {{
 }}
 
 function copyTopic(url) {{
+  console.log('copyTopic called with url:', url);
   pendingTopicUrl = url;
   document.getElementById('topic-modal').classList.add('show');
   document.getElementById('topic-input').focus();
@@ -221,6 +222,7 @@ function copyTopic(url) {{
 
 function confirmTopic() {{
   const topic = document.getElementById('topic-input').value.trim();
+  console.log('confirmTopic called, topic:', topic, 'pendingTopicUrl:', pendingTopicUrl);
   if (!topic) {{
     showToast('Enter a topic');
     return;
@@ -229,13 +231,16 @@ function confirmTopic() {{
     showToast('No link selected — try again');
     return;
   }}
-  navigator.clipboard.writeText('topic ' + pendingTopicUrl + ' ' + topic).then(() => {{
+  const cmd = 'topic ' + pendingTopicUrl + ' ' + topic;
+  console.log('Writing to clipboard:', cmd);
+  navigator.clipboard.writeText(cmd).then(() => {{
     showToast('Copied! Run: clawlinks.sh topic "' + pendingTopicUrl + '" "' + topic + '"');
     pendingTopicUrl = null;
     document.getElementById('topic-input').value = '';
     document.getElementById('topic-modal').classList.remove('show');
   }}).catch((err) => {{
-    showToast('Clipboard error: ' + err.message);
+    console.error('Clipboard error:', err);
+    showToast('Clipboard error: ' + err.message + ' (use HTTPS or click the page first)');
   }});
 }}
 
