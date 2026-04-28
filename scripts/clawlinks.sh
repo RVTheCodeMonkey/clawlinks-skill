@@ -208,6 +208,8 @@ function showToast(msg) {{
 function copyDelete(url) {{
   navigator.clipboard.writeText('delete ' + url).then(() => {{
     showToast('Copied! Run: clawlinks.sh delete "' + url + '"');
+  }}).catch((err) => {{
+    showToast('Clipboard error: ' + err.message);
   }});
 }}
 
@@ -226,6 +228,8 @@ function confirmTopic() {{
       pendingTopicUrl = null;
       document.getElementById('topic-input').value = '';
       document.getElementById('topic-modal').classList.remove('show');
+    }}).catch((err) => {{
+      showToast('Clipboard error: ' + err.message);
     }});
   }}
 }}
