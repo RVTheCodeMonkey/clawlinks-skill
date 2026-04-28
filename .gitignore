@@ -1,0 +1,3 @@
+# Ignore data files — these are runtime, not skill code
+links.json
+index.html
