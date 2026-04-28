@@ -221,17 +221,22 @@ function copyTopic(url) {{
 
 function confirmTopic() {{
   const topic = document.getElementById('topic-input').value.trim();
-  if (!topic) return;
-  if (pendingTopicUrl) {{
-    navigator.clipboard.writeText('topic ' + pendingTopicUrl + ' ' + topic).then(() => {{
-      showToast('Copied! Run: clawlinks.sh topic "' + pendingTopicUrl + '" "' + topic + '"');
-      pendingTopicUrl = null;
-      document.getElementById('topic-input').value = '';
-      document.getElementById('topic-modal').classList.remove('show');
-    }}).catch((err) => {{
-      showToast('Clipboard error: ' + err.message);
-    }});
+  if (!topic) {{
+    showToast('Enter a topic');
+    return;
   }}
+  if (!pendingTopicUrl) {{
+    showToast('No link selected — try again');
+    return;
+  }}
+  navigator.clipboard.writeText('topic ' + pendingTopicUrl + ' ' + topic).then(() => {{
+    showToast('Copied! Run: clawlinks.sh topic "' + pendingTopicUrl + '" "' + topic + '"');
+    pendingTopicUrl = null;
+    document.getElementById('topic-input').value = '';
+    document.getElementById('topic-modal').classList.remove('show');
+  }}).catch((err) => {{
+    showToast('Clipboard error: ' + err.message);
+  }});
 }}
 
 function cancelTopic() {{
